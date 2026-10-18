@@ -1,0 +1,96 @@
+<div class="home-layout">
+  <aside class="profile-sidebar">
+    <section class="profile-card">
+      <div class="profile-topline">
+        <span class="status-dot"></span>
+        <span class="profile-label">ABOUT ME</span>
+      </div>
+
+      <a class="profile-avatar-link"
+         href="https://github.com/Froscen"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="访问我的 GitHub">
+        <img class="profile-avatar"
+             src="https://github.com/Froscen.png"
+             alt="Froscen 的 GitHub 头像">
+      </a>
+
+      <h2 class="profile-name">Froscen</h2>
+      <p class="profile-handle">@Froscen</p>
+      <p class="profile-bio">
+        记录学习与实践，探索技术背后的运行原理。
+      </p>
+
+      <div class="profile-divider"></div>
+
+      <a class="github-link"
+         href="https://github.com/Froscen"
+         target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.54v-2.1c-3.1.67-3.76-1.32-3.76-1.32-.5-1.28-1.24-1.62-1.24-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15 1 .1.76 2.01 3.3 1.54.1-.73.4-1.23.72-1.51-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.06 1.15a10.6 10.6 0 0 1 5.57 0c2.12-1.44 3.05-1.15 3.05-1.15.61 1.54.23 2.68.12 2.96.71.78 1.14 1.78 1.14 3.01 0 4.28-2.61 5.23-5.1 5.5.4.35.76 1.02.76 2.06v3.05c0 .3.2.65.77.54A11.1 11.1 0 0 0 12 .9Z"/>
+        </svg>
+        <span>访问 GitHub</span>
+        <span class="github-arrow">↗</span>
+      </a>
+
+      <div class="profile-topics">
+        <span class="profile-label">INTERESTS</span>
+        <div class="topic-list">
+          <span>分布式系统</span>
+          <span>Go</span>
+          <span>Linux</span>
+          <span>系统设计</span>
+        </div>
+      </div>
+    </section>
+  </aside>
+
+  <section class="posts-section">
+    <div class="section-heading">
+      <div>
+        <h1>文章列表</h1>
+        <p class="posts-subtitle">记录思考，分享实践</p>
+      </div>
+      <span class="section-meta">ALL POSTS</span>
+    </div>
+
+    <% if (page.posts && page.posts.length) { %>
+      <div class="post-list">
+        <% page.posts.each(function(post) { %>
+          <article class="post-card">
+            <div class="post-meta">
+              <time datetime="<%= post.date.toISOString() %>"><%= date(post.date, 'YYYY.MM.DD') %></time>
+              <span class="post-dot">/</span>
+              <span><%= post.categories && post.categories.length ? post.categories.first().name : '技术笔记' %></span>
+            </div>
+
+            <h2 class="post-title">
+              <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+            </h2>
+
+            <% if (post.excerpt) { %>
+              <div class="post-excerpt"><%- post.excerpt %></div>
+            <% } else if (post.content) { %>
+              <p class="post-excerpt"><%= strip_html(post.content).slice(0, 180) %>…</p>
+            <% } %>
+
+            <div class="post-card-footer">
+              <a class="read-link" href="<%- url_for(post.path) %>">
+                阅读全文 <span>↗</span>
+              </a>
+              <span class="read-label">READ ARTICLE</span>
+            </div>
+          </article>
+        <% }); %>
+      </div>
+
+      <% if (page.total > 1) { %>
+        <nav class="pagination">
+          <%- paginator({prev_text: '← 更新文章', next_text: '更多文章 →'}) %>
+        </nav>
+      <% } %>
+    <% } else { %>
+      <p class="empty-state">还没有文章，开始写下你的第一篇技术笔记吧。</p>
+    <% } %>
+  </section>
+</div>

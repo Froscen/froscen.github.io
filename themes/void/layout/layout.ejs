@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'zh-CN' %>">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09090d">
+  <title><%= page.title ? page.title + ' | ' : '' %><%= config.title %></title>
+  <meta name="description" content="<%= page.description || theme.description || config.description || '' %>">
+  <link rel="stylesheet" href="<%- url_for('/css/void.css') %>">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="<%- url_for('/') %>">
+      <span class="brand-mark">V</span>
+      <span><%= config.title || 'VOID' %></span>
+    </a>
+    <nav class="site-nav">
+      <% Object.keys(theme.menu || {}).forEach(function(name) { %>
+        <a href="<%- url_for(theme.menu[name]) %>"><%= name %></a>
+      <% }); %>
+    </nav>
+  </header>
+
+  <main class="site-main">
+    <%- body %>
+  </main>
+
+  <footer class="site-footer">
+    <span>持续探索 · 持续理解</span>
+    <span>© <%= new Date().getFullYear() %> <%= config.author || config.title %></span>
+  </footer>
+</body>
+</html>

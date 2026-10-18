@@ -1,0 +1,21 @@
+<article class="article">
+  <header class="article-header">
+    <a class="back-link" href="<%- url_for('/') %>">← ALL NOTES</a>
+    <p class="eyebrow"><%= page.categories && page.categories.length ? page.categories.first().name : 'TECHNICAL NOTE' %></p>
+    <h1><%= page.title %></h1>
+    <div class="article-meta">
+      <time datetime="<%= page.date.toISOString() %>"><%= date(page.date, 'YYYY.MM.DD') %></time>
+      <span>·</span>
+      <span><%= config.author || 'VOID NOTES' %></span>
+    </div>
+  </header>
+
+  <div class="article-body">
+    <%- page.content %>
+  </div>
+
+  <footer class="article-end">
+    <span class="accent">■</span> END OF NOTE
+    <a href="<%- url_for('/') %>">BACK TO HOME ↑</a>
+  </footer>
+</article>
