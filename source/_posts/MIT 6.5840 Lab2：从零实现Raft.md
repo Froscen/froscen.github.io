@@ -1,3 +1,13 @@
+---
+title: MIT 6.5840 Lab2：从零实现Raft
+date: 2026-11-13 22:00:00
+categories:
+  - MIT 6.5840
+tags:
+  - Raft
+  - Go
+---
+
 # 一、整体架构：`Raft`节点需要维护什么？
 
 ## 1. `Persistent State`
